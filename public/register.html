@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+用户名：<input type="text" id="name"><br/><br/>
+密码：<input type="text" id="password"><br/><br/>
+<button id="register">注册</button>
+
+</body>
+</html>
+<script src="/javascripts/jquery.js"></script>
+<script type="text/javascript">
+$("#register").click(function(){
+	if($("#name").val()===""&&("#password").val()===""){
+		alert("用户名和密码不能为空")
+		return
+	}
+	$.post("/users/register",{
+		name:$("#name").val(),
+		password:$("#password").val()
+	}).then((res)=>{
+		if(res.ret){
+			alert("注册成功")
+			location.href="/login.html"
+		}else{
+			alert("注册失败")
+		}
+	})
+
+})
+</script>

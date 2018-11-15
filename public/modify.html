@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<input type="text" id="uname">
+<input type="text" id="id">
+<button id="modifyok">确认修改</button>
+
+</body>
+</html>
+<script src="/javascripts/jquery.js"></script>
+<script type="text/javascript">
+	//获取id展现到页面的input框里
+	var id = location.search.substring(1).split("=")[1];
+	// console.log(id);
+	$.get("/modify/"+id).then((res)=>{
+		console.log(res)
+		uname:$("#uname").val(res.list[0].name)
+		id:$("#id").val(res.list[0]._id)
+	})
+	//确认修改
+	$("#modifyok").click(function(){
+		$.get("/modifyok/"+$("#id").val()+"/"+$("#uname").val()).then((res)=>{
+			if(res.ret){
+				location.href="/list.html"
+			}
+		})
+	})
+</script>

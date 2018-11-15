@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+用户名：<input type="text" id="name"><br/><br/>
+密码：<input type="text" id="password"><br/><br/>
+<button id="login">登录</button>
+
+</body>
+</html>
+<script src="/javascripts/jquery.js"></script>
+<script type="text/javascript">
+$("#login").click(function(){
+	if($("#name").val()===""&&("#password").val()===""){
+		alert("登录不能为空")
+		return
+	}
+	$.post("/users/login",{
+		name:$("#name").val(),
+		password:$("#password").val()
+	}).then((res)=>{
+		if(res.data){
+			alert("登录成功")
+			location.href="/list.html"
+		}else{
+			alert("登录失败")
+		}
+	})
+
+})
+</script>

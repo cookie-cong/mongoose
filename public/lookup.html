@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<input type="text" id="lookup">
+<button id="search">搜索</button>
+<a href="/list.html">返回列表页</a>
+<div id="box">
+	
+</div>
+</body>
+</html>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/baiduTemplate.js"></script>
+<script type="text/html" id="tem">
+	<ul>
+		<% for(var i = 0 ; i<list.length; i++){	%>
+		<li><%=list[i].name%></li>
+	<%}%>
+	</ul>
+</script>
+<script type="text/javascript">
+	$("#search").click(function(){
+		$.get("/lookup/"+$("#lookup").val()).then((res)=>{
+			var content = baidu.template("tem",res);
+			$("#box").html(content);
+		})
+	})
+</script>
